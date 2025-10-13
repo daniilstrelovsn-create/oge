@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к ОГЭ по информатике</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .date-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        
+        .date-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .date-value {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+        
+        .resources-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .resource-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .topic-list {
+            list-style-type: none;
+        }
+        
+        .topic-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+        
+        .topic-item:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        .topic-link {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .topic-link:hover {
+            color: #3498db;
+        }
+        
+        .topic-link::after {
+            content: "→";
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .student-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .student-card:hover {
+            background-color: #e3f2fd;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .student-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .student-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .student-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .progress-container {
+            margin-top: 10px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #2ecc71;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .instructions-header::after {
+            content: "▼";
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .instructions-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        
+        .instructions-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            max-height: 1000px;
+        }
+        
+        .instructions-content.collapsed {
+            max-height: 0;
+        }
+        
+        .instructions-list {
+            list-style-type: decimal;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .deadline {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            font-weight: 600;
+            color: #856404;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .students-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title, .instructions-header {
+                font-size: 1.5rem;
+            }
+            
+            .dates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Подготовка к ОГЭ по информатике</h1>
+            <p class="subtitle">Второй модуль: материалы для классной работы и домашние задания</p>
+        </header>
+        
+        <section class="section">
+            <h2 class="section-title">Важное</h2>
+            <div class="dates-grid">
+                <div class="date-card">
+                    <div class="date-title">Дата экзамена</div>
+                    <div class="date-value">to be continued</div>
+                </div>
+                <div class="date-card">
+                    <div class="date-title">Дата пробника</div>
+                    <div class="date-value">to be continued</div>
+                </div>
+            </div>
+            <div class="resources-list">
+                <a href="https://4ege.ru/gia-po-informatike/76052-demoversija-oge-2026-po-informatike.html" class="resource-link" target="_blank">Демоверсия ОГЭ 2025</a>
+                <a href="https://oge.fipi.ru/bank/index.php?proj=74676951F093A0754D74F2D6E7955F06" class="resource-link" target="_blank">Открытый банк заданий ОГЭ</a>
+                <a href="https://drive.google.com/drive/folders/1aVwyUpBQjoyPan7AeR4yj528oEN6yFV6" class="resource-link" target="_blank">Материалы для подготовки</a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Классная работа</h2>
+            <ul class="topic-list">
+                <li class="topic-item">
+                    <a href="https://docs.google.com/presentation/d/1O8pQ6lv0qMwyHOiaePQOJCoDusd0hdoj/edit?usp=sharing&ouid=106406260288147366701&rtpof=true&sd=true" class="topic-link" target="_blank">
+                        <span>Тип №1: Измерение информации</span>
+                    </a>
+                </li>
+                <li class="topic-item">
+                    <a href="https://docs.google.com/presentation/d/1pRAMkZfekO1GXMmzq0e7428UcW5T3ejO/edit?usp=sharing&ouid=106406260288147366701&rtpof=true&sd=true" class="topic-link" target="_blank">
+                        <span>Тип №2: Кодирование информации</span>
+                    </a>
+                </li>
+                <li class="topic-item">
+                    <a href="https://docs.google.com/presentation/d/1on7N_fO2Mf9Fbl4HVJU7AfB9USBUL8vX/edit?usp=sharing&ouid=106406260288147366701&rtpof=true&sd=true" class="topic-link" target="_blank">
+                        <span>Тип №3: Логические операции</span>
+                    </a>
+                </li>
+                <li class="topic-item">
+                    <a href="https://docs.google.com/presentation/d/1on7N_fO2Mf9Fbl4HVJU7AfB9USBUL8vX/edit?usp=sharing&ouid=106406260288147366701&rtpof=true&sd=true" class="topic-link" target="_blank">
+                        <span>Тип №4: Графы по таблице</span>
+                    </a>
+                </li>
+                <li class="topic-item">
+                    <a href="https://docs.google.com/presentation/d/1q5RTeRL4Pk7KTAwYtRBHIzZrlgfXNe5y/edit?usp=sharing&ouid=106406260288147366701&rtpof=true&sd=true" class="topic-link" target="_blank">
+                        <span>Тип №5: Анализ алгоритма</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Домашние задания</h2>
+            <div class="students-grid">
+                <!-- Примеры домашних заданий для 18 человек -->
+                <div class="student-card">
+                    <div class="student-name">Петров А.А.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-petrov">65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-petrov" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Иванов Б.В.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-ivanov">42%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-ivanov" style="width: 42%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Сидоров В.Г.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-sidorov">78%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-sidorov" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Кузнецова Д.Е.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-kuznetsova">91%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-kuznetsova" style="width: 91%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Смирнов Е.Ж.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-smirnov">35%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-smirnov" style="width: 35%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Попов З.И.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-popov">57%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-popov" style="width: 57%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Васильев К.Л.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-vasilyev">83%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-vasilyev" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Петрова Л.М.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-petrova">72%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-petrova" style="width: 72%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Козлов М.Н.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-kozlov">48%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-kozlov" style="width: 48%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Новиков О.П.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-novikov">66%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-novikov" style="width: 66%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Морозов П.Р.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-morozov">29%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-morozov" style="width: 29%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Волков Р.С.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-volkov">95%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-volkov" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Алексеева С.Т.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-alekseeva">53%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-alekseeva" style="width: 53%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Лебедев Т.У.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-lebedev">87%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-lebedev" style="width: 87%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Семенов У.Ф.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-semenov">61%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-semenov" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Павлов Ф.Х.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-pavlov">76%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-pavlov" style="width: 76%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Григорьева Х.Ц.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-grigoryeva">39%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-grigoryeva" style="width: 39%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-card">
+                    <div class="student-name">Макаров Ц.Ч.</div>
+                    <a href="https://docs.google.com/spreadsheets/d/1tXexhMAjcCwGkru7rTROrXkrL40cMGFdtw9May3jmw4/edit?usp=sharing" class="student-link" target="_blank">Домашнее задание</a>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Прогресс</span>
+                            <span id="progress-makarov">82%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-bar-makarov" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="instructions">
+            <div class="instructions-header">
+                Инструкция по выполнению домашнего задания
+            </div>
+            <div class="instructions-content">
+                <ol class="instructions-list">
+                    <li>Перейдите по ссылке под вашей фамилией на Google таблицы.</li>
+                    <li>Заполняете ячейку C2 таблицы, своим ФИО (если не заполнено).</li>
+                    <li>Скопируете номер задания.</li>
+                    <li>Переходите в "открытый банк заданий ОГЭ" (ссылка в ячейке С3 и выше).</li>
+                    <li>На сайте "открытый банк заданий ОГЭ" нажмите подбор заданий, затем вставьте номер задания в поле: "номер задания".</li>
+                    <li>Решите задание, проверьте правильность выполнения на сайте и внесите ответ в табличку.</li>
+                </ol>
+                <div class="deadline">
+                    Дедлайн: 16 ноября 23:59
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Материалы для подготовки к ОГЭ по информатике. Второй модуль.</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript для раскрывающегося блока с инструкцией
+        document.addEventListener('DOMContentLoaded', function() {
+            const instructionsHeader = document.querySelector('.instructions-header');
+            const instructionsContent = document.querySelector('.instructions-content');
+            
+            instructionsHeader.addEventListener('click', function() {
+                this.classList.toggle('collapsed');
+                instructionsContent.classList.toggle('collapsed');
+            });
+        });
+    </script>
+</body>
+</html>
