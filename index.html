@@ -281,15 +281,152 @@
             margin-top: 20px;
         }
         
-        .classwork-image {
-            width: 100%;
+        .classwork-image-container {
+            position: relative;
+            cursor: pointer;
             border-radius: 8px;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
         
-        .classwork-image:hover {
+        .classwork-image-container:hover {
             transform: scale(1.02);
+        }
+        
+        .classwork-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .classwork-image-container:hover .classwork-image {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .classwork-image-container:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .zoom-icon {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        /* Модальное окно для полноэкранного просмотра */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        
+        .modal-image {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #3498db;
+        }
+        
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .prev {
+            left: 20px;
+        }
+        
+        .next {
+            right: 20px;
+        }
+        
+        .image-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
         
         footer {
@@ -319,6 +456,60 @@
             
             .classwork-images {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .classwork-image-container {
+                margin-bottom: 10px;
+            }
+            
+            .modal-content {
+                padding: 10px;
+            }
+            
+            .modal-image {
+                max-width: 100%;
+                max-height: 80%;
+            }
+            
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+            }
+            
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            .prev {
+                left: 10px;
+            }
+            
+            .next {
+                right: 10px;
+            }
+            
+            .image-counter {
+                font-size: 16px;
+                bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .classwork-images {
+                gap: 10px;
             }
         }
     </style>
@@ -674,14 +865,52 @@
             </div>
             <div class="classwork-content">
                 <div class="classwork-images">
-                    <img src="classwork1.svg" alt="Классная работа 1" class="classwork-image">
-                    <img src="classwork2.svg" alt="Классная работа 2" class="classwork-image">
-                    <img src="classwork3.svg" alt="Классная работа 3" class="classwork-image">
-                    <img src="classwork4.svg" alt="Классная работа 4" class="classwork-image">
-                    <img src="classwork5.svg" alt="Классная работа 5" class="classwork-image">
+                    <div class="classwork-image-container" data-index="0">
+                        <img src="classwork1.svg" alt="Классная работа 1" class="classwork-image">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="classwork-image-container" data-index="1">
+                        <img src="classwork2.svg" alt="Классная работа 2" class="classwork-image">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="classwork-image-container" data-index="2">
+                        <img src="classwork3.svg" alt="Классная работа 3" class="classwork-image">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="classwork-image-container" data-index="3">
+                        <img src="classwork4.svg" alt="Классная работа 4" class="classwork-image">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="classwork-image-container" data-index="4">
+                        <img src="classwork5.svg" alt="Классная работа 5" class="classwork-image">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">🔍</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        
+        <!-- Модальное окно для полноэкранного просмотра -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <button class="nav-button prev">❮</button>
+            <button class="nav-button next">❯</button>
+            <div class="modal-content">
+                <img id="modalImage" class="modal-image" src="" alt="">
+            </div>
+            <div class="image-counter">
+                <span id="currentImage">1</span> / <span id="totalImages">5</span>
+            </div>
+        </div>
         
         <footer>
             <p>Материалы для подготовки к ОГЭ по информатике. Третий модуль.</p>
@@ -705,6 +934,81 @@
                 this.classList.toggle('collapsed');
                 classworkContent.classList.toggle('collapsed');
             });
+
+            // JavaScript для модального окна с изображениями
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const currentImageSpan = document.getElementById('currentImage');
+            const totalImagesSpan = document.getElementById('totalImages');
+            const imageContainers = document.querySelectorAll('.classwork-image-container');
+            
+            let currentImageIndex = 0;
+            const totalImages = imageContainers.length;
+            
+            totalImagesSpan.textContent = totalImages;
+            
+            // Открытие модального окна при клике на изображение
+            imageContainers.forEach(container => {
+                container.addEventListener('click', function() {
+                    currentImageIndex = parseInt(this.getAttribute('data-index'));
+                    updateModalImage();
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+                });
+            });
+            
+            // Закрытие модального окна
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Восстанавливаем прокрутку
+            });
+            
+            // Закрытие при клике вне изображения
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Навигация между изображениями
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+                updateModalImage();
+            });
+            
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % totalImages;
+                updateModalImage();
+            });
+            
+            // Навигация с помощью клавиатуры
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === 'block') {
+                    if (e.key === 'ArrowLeft') {
+                        currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+                        updateModalImage();
+                    } else if (e.key === 'ArrowRight') {
+                        currentImageIndex = (currentImageIndex + 1) % totalImages;
+                        updateModalImage();
+                    } else if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+            
+            // Обновление изображения в модальном окне
+            function updateModalImage() {
+                const imageSrc = imageContainers[currentImageIndex].querySelector('img').src;
+                modalImg.src = imageSrc;
+                currentImageSpan.textContent = currentImageIndex + 1;
+            }
         });
     </script>
 </body>
