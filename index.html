@@ -214,7 +214,7 @@
             transition: width 0.5s ease;
         }
         
-        .instructions {
+        .instructions, .classwork {
             background-color: white;
             border-radius: 15px;
             padding: 30px;
@@ -222,7 +222,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .instructions-header {
+        .instructions-header, .classwork-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -234,23 +234,23 @@
             font-size: 1.8rem;
         }
         
-        .instructions-header::after {
+        .instructions-header::after, .classwork-header::after {
             content: "▼";
             font-size: 1.2rem;
             transition: transform 0.3s;
         }
         
-        .instructions-header.collapsed::after {
+        .instructions-header.collapsed::after, .classwork-header.collapsed::after {
             transform: rotate(-90deg);
         }
         
-        .instructions-content {
+        .instructions-content, .classwork-content {
             overflow: hidden;
             transition: max-height 0.3s ease;
             max-height: 1000px;
         }
         
-        .instructions-content.collapsed {
+        .instructions-content.collapsed, .classwork-content.collapsed {
             max-height: 0;
         }
         
@@ -274,6 +274,24 @@
             color: #856404;
         }
         
+        .classwork-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .classwork-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .classwork-image:hover {
+            transform: scale(1.02);
+        }
+        
         footer {
             text-align: center;
             margin-top: 40px;
@@ -291,11 +309,15 @@
                 font-size: 2rem;
             }
             
-            .section-title, .instructions-header {
+            .section-title, .instructions-header, .classwork-header {
                 font-size: 1.5rem;
             }
             
             .dates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .classwork-images {
                 grid-template-columns: 1fr;
             }
         }
@@ -646,34 +668,44 @@
             </div>
         </section>
         
+        <section class="classwork">
+            <div class="classwork-header">
+                Классная работа
+            </div>
+            <div class="classwork-content">
+                <div class="classwork-images">
+                    <img src="classwork1.svg" alt="Классная работа 1" class="classwork-image">
+                    <img src="classwork2.svg" alt="Классная работа 2" class="classwork-image">
+                    <img src="classwork3.svg" alt="Классная работа 3" class="classwork-image">
+                    <img src="classwork4.svg" alt="Классная работа 4" class="classwork-image">
+                    <img src="classwork5.svg" alt="Классная работа 5" class="classwork-image">
+                </div>
+            </div>
+        </section>
+        
         <footer>
             <p>Материалы для подготовки к ОГЭ по информатике. Третий модуль.</p>
         </footer>
     </div>
 
     <script>
-        // JavaScript для раскрывающегося блока с инструкцией
+        // JavaScript для раскрывающихся блоков
         document.addEventListener('DOMContentLoaded', function() {
             const instructionsHeader = document.querySelector('.instructions-header');
             const instructionsContent = document.querySelector('.instructions-content');
+            const classworkHeader = document.querySelector('.classwork-header');
+            const classworkContent = document.querySelector('.classwork-content');
             
             instructionsHeader.addEventListener('click', function() {
                 this.classList.toggle('collapsed');
                 instructionsContent.classList.toggle('collapsed');
             });
+            
+            classworkHeader.addEventListener('click', function() {
+                this.classList.toggle('collapsed');
+                classworkContent.classList.toggle('collapsed');
+            });
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
