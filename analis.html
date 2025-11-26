@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ ошибок пробника</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        .task-analysis {
+            margin-bottom: 30px;
+        }
+        
+        .task-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .task-bar {
+            flex: 1;
+            background-color: #3498db;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .task-bar:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
+        }
+        
+        .task-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .task-count {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .student-errors {
+            margin-top: 30px;
+        }
+        
+        .student-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .student-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .student-score {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .student-errors-list {
+            display: none;
+            margin-top: 10px;
+        }
+        
+        .student-errors-list.show {
+            display: block;
+        }
+        
+        .error-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .grade-5 { border-left-color: #2ecc71; }
+        .grade-4 { border-left-color: #3498db; }
+        .grade-3 { border-left-color: #f39c12; }
+        .grade-2 { border-left-color: #e74c3c; }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .conclusion {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .conclusion h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .conclusion ul {
+            padding-left: 20px;
+        }
+        
+        .conclusion li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">Анализ ошибок пробника ОГЭ по информатике</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">16</div>
+                    <div class="stat-label">Всего учеников</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">Написали на "5"</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Написали на "4"</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">11</div>
+                    <div class="stat-label">Написали на "3"</div>
+                </div>
+            </div>
+            
+            <div class="task-analysis">
+                <h3>Самые проблемные задания</h3>
+                <div class="task-chart">
+                    <!-- Будет заполнено JavaScript -->
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Топ-5 самых сложных заданий:</strong></p>
+                <p>1. Задание 9 (11 ошибок)</p>
+                <p>2. Задание 3 (10 ошибок)</p>
+                <p>3. Задание 6 (9 ошибок)</p>
+                <p>4. Задание 1 (7 ошибок)</p>
+                <p>5. Задание 4, 5, 7, 8 (по 6 ошибок)</p>
+            </div>
+            
+            <div class="student-errors">
+                <h3>Ошибки по ученикам</h3>
+                <!-- Будет заполнено JavaScript -->
+            </div>
+            
+            <div class="conclusion">
+                <h3>Выводы и рекомендации</h3>
+                <ul>
+                    <li><strong>Задание 9</strong> - самая проблемная тема (11 ошибок). Необходимо уделить дополнительное время на отработку этого типа заданий.</li>
+                    <li><strong>Задания 3 и 6</strong> также вызывают значительные трудности (10 и 9 ошибок соответственно).</li>
+                    <li>Только 2 ученика из 16 справились с работой на "отлично".</li>
+                    <li>Большинство учеников (11 человек) получили оценку "3", что указывает на необходимость усиленной подготовки.</li>
+                    <li>Рекомендуется провести дополнительные занятия по темам, соответствующим самым проблемным заданиям.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Данные об ошибках
+        const studentData = [
+            { name: "Семенов", score: 8, grade: 3, errors: [4, 6, 7, 9, 10] },
+            { name: "Лалаянц", score: 11, grade: 4, errors: [2, 3, 6, 9] },
+            { name: "Яницкий", score: 5, grade: 3, errors: [3, 4, 5, 6, 8, 9, 10] },
+            { name: "Петросов", score: 9, grade: 3, errors: [3, 7, 9] },
+            { name: "Пиотровская", score: 1, grade: 2, errors: [2, 3, 4, 5, 6, 7, 8, 9, 10] },
+            { name: "Микляев", score: 17, grade: 5, errors: [1] },
+            { name: "Макарова", score: 9, grade: 3, errors: [1, 6, 8, 9] },
+            { name: "Попов", score: 8, grade: 3, errors: [1, 3, 4, 6, 9] },
+            { name: "Мелехова", score: 17, grade: 5, errors: [2] },
+            { name: "Сухарев", score: 5, grade: 3, errors: [1, 3, 6, 7, 9] },
+            { name: "Волошко", score: 8, grade: 3, errors: [1, 5, 6, 8, 9] },
+            { name: "Шмараев", score: 12, grade: 4, errors: [7, 8] },
+            { name: "Сакаев", score: 20, grade: 5, errors: [] },
+            { name: "Колмогорцева", score: 12, grade: 4, errors: [5, 8, 9] },
+            { name: "Потапов", score: 9, grade: 3, errors: [3, 7, 8, 9] },
+            { name: "Пикулев", score: 9, grade: 3, errors: [3, 5, 6, 8, 9] }
+        ];
+
+        // Анализ ошибок по заданиям
+        const taskErrors = {};
+        for (let i = 1; i <= 10; i++) {
+            taskErrors[i] = 0;
+        }
+
+        studentData.forEach(student => {
+            student.errors.forEach(error => {
+                taskErrors[error]++;
+            });
+        });
+
+        // Создание графика ошибок по заданиям
+        const taskChart = document.querySelector('.task-chart');
+        for (let i = 1; i <= 10; i++) {
+            const errorCount = taskErrors[i];
+            const maxErrors = Math.max(...Object.values(taskErrors));
+            const height = (errorCount / maxErrors) * 150;
+            
+            const bar = document.createElement('div');
+            bar.className = 'task-bar';
+            bar.style.height = `${height}px`;
+            
+            const count = document.createElement('div');
+            count.className = 'task-count';
+            count.textContent = errorCount;
+            
+            const label = document.createElement('div');
+            label.className = 'task-label';
+            label.textContent = `№${i}`;
+            
+            bar.appendChild(count);
+            bar.appendChild(label);
+            taskChart.appendChild(bar);
+        }
+
+        // Создание карточек учеников с ошибками
+        const studentErrorsContainer = document.querySelector('.student-errors');
+        
+        studentData.forEach(student => {
+            const card = document.createElement('div');
+            card.className = `student-card grade-${student.grade}`;
+            
+            const header = document.createElement('div');
+            header.className = 'student-header';
+            
+            const name = document.createElement('div');
+            name.className = 'student-name';
+            name.textContent = student.name;
+            
+            const score = document.createElement('div');
+            score.className = 'student-score';
+            score.textContent = `Баллы: ${student.score}, Оценка: ${student.grade}`;
+            
+            header.appendChild(name);
+            header.appendChild(score);
+            
+            const errorsList = document.createElement('div');
+            errorsList.className = 'student-errors-list';
+            
+            if (student.errors.length > 0) {
+                student.errors.forEach(error => {
+                    const errorTag = document.createElement('span');
+                    errorTag.className = 'error-tag';
+                    errorTag.textContent = `№${error}`;
+                    errorsList.appendChild(errorTag);
+                });
+            } else {
+                const noErrors = document.createElement('p');
+                noErrors.textContent = 'Ошибок нет';
+                noErrors.style.color = '#2ecc71';
+                errorsList.appendChild(noErrors);
+            }
+            
+            card.appendChild(header);
+            card.appendChild(errorsList);
+            studentErrorsContainer.appendChild(card);
+            
+            // Добавляем обработчик клика для раскрытия списка ошибок
+            header.addEventListener('click', () => {
+                errorsList.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
